@@ -16,6 +16,44 @@
       when: ansible_distribution in ['Debian', 'Ubuntu', 'Pop!_OS',
         'elementary OS']
 
+# Apply common configuration to all hosts.
+- hosts: all
+  tags: common
+  become: true
+
+  roles:
+    - common
+
+# # Configure and deploy personal computers and laptops.
+# - hosts: pc
+#   tags: pc
+#   become: true
+
+#   roles:
+#     - pc
+
+# # Apply power management tweaks to laptops.
+# - hosts: laptop
+#   tags: laptop
+#   become: true
+
+#   roles:
+#     - laptop
+
+# # Apply power management tweaks to laptops.
+# - hosts: laptop
+#   tags: laptop
+#   become: true
+
+#   roles:
+#     - laptop
+
+# # Configure and deploy servers.
+# - hosts: server
+#   tags: server
+#   become: true
+#   roles: server
+
 # Run cleanup tasks to all hosts.
 - hosts: all
   become: true
