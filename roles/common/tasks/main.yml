@@ -2,6 +2,14 @@
 # This playbook applies the common configuration, packages and software to
 # all hosts.
 
+# Include variables for the host distribution
+- include_vars: "{{ ansible_distribution
+    | lower
+    | replace('!', '')
+    | replace(' ', '_') }}.yml"
+  tags: always
+  when: ansible_distribution in ['Debian', 'Ubuntu', 'Pop!_OS', 'elementary OS']
+
 - block:
 
   # Install common package depedencies
