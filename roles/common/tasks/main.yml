@@ -1,0 +1,11 @@
+---
+# This playbook applies the common configuration, packages and software to
+# all hosts.
+
+- block:
+
+  # Install common package depedencies
+  - import_tasks: depedencies.yml
+
+  # Install common packages
+  - include_tasks: packages.yml
