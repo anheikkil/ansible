@@ -17,3 +17,7 @@
 
   # Install common packages
   - include_tasks: packages.yml
+
+  # Install ufetch
+  - include_tasks: software/ufetch.yml
+    when: ufetch_package is defined
