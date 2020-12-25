@@ -1,0 +1,25 @@
+---
+# This playbook clones and deploys ufetch from https://gitlab.com/jschx/ufetch.
+- name: Install ufetch
+  block:
+    - name: Clone ufetch repository
+      tags: common, software, ufetch
+      git:
+        repo: 'https://gitlab.com/jschx/ufetch.git'
+        dest: /usr/local/src/ufetch
+
+    - name: Stat ufetch
+      stat:
+        path: "/usr/local/src/ufetch/{{ ufetch_package }}"
+      register: ufetch_stat
+
+    - name: Create link to ufetch in /usr/local/bin/ folder
+      file:
+        src: "/usr/local/src/ufetch/{{ ufetch_package }}"
+        path: /usr/local/bin/ufetch
+        state: hard
+        owner: root
+        group: root
+        mode: 0755
+      when: ufetch_stat.stat.exists
+  when: ufetch_package is defined
