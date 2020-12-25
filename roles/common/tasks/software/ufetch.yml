@@ -1,5 +1,5 @@
 ---
-# This playbook clones and deploys ufetch from https://gitlab.com/jschx/ufetch.
+# This playbook clones and deploys ufetch.
 - name: Install ufetch
   block:
     - name: Clone ufetch repository
