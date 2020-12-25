@@ -1,0 +1,28 @@
+---
+# This playbook configures and deploys desktop computers, laptops, servers and
+# virtual machines with ansible-pull.
+
+# Run preparation tasks on all hosts.
+- hosts: all
+  tags: always
+  become: true
+
+  pre_tasks:
+
+    - name: Update apt cache
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ['Debian', 'Ubuntu', 'Pop!_OS',
+        'elementary OS']
+
+# Run cleanup tasks to all hosts.
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Remove unused packages
+      apt: autoremove=yes
+
+    - name: Clean package cache
+      apt: autoclean=yes
