@@ -1,0 +1,8 @@
+---
+# Variables for Pop!_OS
+
+# Set desktop environment
+gnome: true
+
+# Define distribution specific packages
+
