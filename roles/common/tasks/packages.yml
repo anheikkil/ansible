@@ -1,0 +1,8 @@
+---
+- name: Install common packages
+  tags: always, common, git, vim
+  apt:
+    name:
+      - git
+      - vim
+  when: ansible_distribution in ['Debian', 'Ubuntu', 'Pop!_OS', 'elementary OS']
