@@ -1,5 +1,5 @@
 ---
-# Variables for Pop!_OS
+# This file defines variables for Pop!_OS
 
-# Define distribution specific packages
-ufetch_package: ufetch-popos # Shell script in ufetch git repository
+# Shell script in ufetch git repository
+ufetch_package: ufetch-popos
