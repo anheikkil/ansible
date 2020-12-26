@@ -1,5 +1,5 @@
 ---
-# Variables for Pop!_OS
+# This file defines variables for elementary OS
 
-# Define distribution specific packages
-ufetch_package: ufetch-elementary # Shell script in ufetch git repository
+# Shell script in ufetch git repository
+ufetch_package: ufetch-elementary
