@@ -2,8 +2,17 @@
 # This playbook configures and deploys desktop and laptops.
 
 # Include variables for the host distribution
-- include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution
+    | lower
+    | replace('!', '')
+    | replace(' ', '_') }}.yml"
   tags: always
-  when: ansible_distribution in [ 'Debian', 'Ubuntu', 'Pop!_OS', 'elementary OS' ]
+  when: ansible_distribution in ['Debian', 'Ubuntu', 'Pop!_OS', 'elementary OS']
 
+# Configure and deploy GNOME desktop environment
+- block:
+
+  - include_tasks: desktop_environments/gnome/packages.yml
+
+  when: gnome is defined and gnome == true
 
