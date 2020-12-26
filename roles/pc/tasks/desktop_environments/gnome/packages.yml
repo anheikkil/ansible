@@ -1,0 +1,55 @@
+---
+# This playbook applies packages and shell extensions for the GNOME desktop
+# environment.
+- block:
+    - name: Install GNOME applications
+      apt:
+        name:
+          - baobab
+          - eog
+          - evince
+          - file-roller
+          - geary
+          - gedit
+          - gnome-calculator
+          - gnome-calendar
+          - gnome-disk-utility
+          - gnome-font-viewer
+          - gnome-logs
+          - gnome-photos
+          - gnome-screenshot
+          - gnome-system-monitor
+          - nautilus
+          - seahorse
+          - simple-scan
+          - tilix
+          # - gnome-terminal
+          # - gnome-tweaks
+          # - gnome-usage
+          # - menulibre
+      when: ansible_distribution in ['Debian', 'Pop!_OS', 'Ubuntu']
+
+    - name: Install GNOME Software Center (Debian, Ubuntu)
+      apt:
+        name:
+          - gnome-software
+          - gnome-software-plugin-flatpak
+          # - gnome-software-plugin-snap
+      when: ansible_distribution in ['Debian', 'Ubuntu']
+
+    - name: Install GNOME Shell extensions
+      apt:
+        name:
+          - gnome-shell-extension-caffeine
+          - gnome-shell-extension-gsconnect
+          - gnome-shell-extension-tilix-shortcut
+          # - gnome-shell-extension-gsconnect-browsers
+          # - gnome-shell-extension-multi-monitors
+          # - gnome-shell-extension-tilix-dropdown
+      when: ansible_distribution in ['Debian', 'Pop!_OS', 'Ubuntu']
+
+    - name: Set tilix as default terminal
+      dconf:
+        key: "/org/gnome/desktop/applications/terminal/exec"
+        value: "'tilix'"
+  when: gnome is defined and gnome == true
