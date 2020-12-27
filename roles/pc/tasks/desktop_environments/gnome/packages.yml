@@ -2,6 +2,7 @@
 # This playbook applies packages and shell extensions for the GNOME desktop
 # environment.
 - block:
+
     - name: Install GNOME applications
       apt:
         name:
@@ -52,4 +53,6 @@
       dconf:
         key: "/org/gnome/desktop/applications/terminal/exec"
         value: "'tilix'"
+      when: packages['tilix'] is defined
+
   when: gnome is defined and gnome == true
