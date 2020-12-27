@@ -2,6 +2,7 @@
 # This playbook clones and deploys Blyr GNOME Shell extension for all users.
 - name: Install Blyr GNOME Shell extension
   block:
+
     - name: Install dependencies for gnome-shell-extension-blyr
       tags: pc, software, gnome-shell-extension-blyr, gir1.2-gtkclutter-1.0
       apt:
@@ -19,9 +20,12 @@
       tags: pc, software, gnome-shell-extension-blyr
       copy:
         src: /usr/local/src/gnome-shell-extension-blyr/blyr@yozoon.dev.gmail.com
-        dest: "/home/{{ item.username }}/.local/share/gnome-shell/extensions/"
+        dest: "{{ item.home }}/.local/share/gnome-shell/extensions/"
         owner: "{{ item.username }}"
         group: "{{ item.username }}"
       loop: "{{ users }}"
       when: users is defined
-  when: gnome_shell_extension_blyr_git_version is defined
+
+  when:
+    - gnome is defined and gnome == true
+    - gnome_shell_extension_blyr_git_version is defined
